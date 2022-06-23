@@ -1,0 +1,75 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: external-dns
+  namespace: external-dns
+spec:
+  chart:
+    spec:
+      chart: ./charts/external-dns
+      interval: 5m
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: GitRepository
+        name: external-dns
+        namespace: external-dns
+      version: '*'
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: -1
+  interval: 2m
+  rollback:
+    cleanupOnFail: true
+    timeout: 10m
+  targetNamespace: external-dns
+  test:
+    enable: false
+  timeout: 10m
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      remediateLastFailure: true
+      retries: 3
+  values:
+    provider: google
+    # Specify the Google project (required when provider=google)
+    # You'll need to create this secret containing your credentials.json
+    extraArgs:
+    - --google-project=leapfrogai
+    sources:
+    - istio-gateway
+    - istio-virtualservice
+    ## List of domains that can be managed. Should be managed by Google Cloud DNS
+    domainFilters: ["bigbang.dev"]
+    policy: sync
+    # These help tell which records are owned by external-dns.
+    registry: "txt"
+    txtPrefix: "externaldns"
+    env:
+    - name: GOOGLE_APPLICATION_CREDENTIALS
+      value: /etc/secrets/service-account/credentials.json
+  postRenderers:
+  - kustomize:
+      # Array of inline strategic merge patch definitions as YAML object.
+      # Note, this is a YAML object and not a string, to avoid syntax
+      # indention errors.
+      patchesStrategicMerge:
+        - kind: Deployment
+          apiVersion: apps/v1
+          metadata:
+            name: external-dns-external-dns
+            namespace: external-dns
+          spec:
+            template:
+              spec:
+                containers:
+                - name: external-dns
+                  volumeMounts:
+                  - name: google-service-account
+                    mountPath: /etc/secrets/service-account/
+                volumes:
+                - name: google-service-account
+                  secret:
+                    secretName: external-dns

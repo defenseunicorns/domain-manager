@@ -1,0 +1,5 @@
+# base64 encoded credentials.json file
+credentials: ""
+
+# Don't use bigbang.dev here, or it'll overwrite the *.bigbang.dev domain in dns
+domain: "domain.bigbang.dev"

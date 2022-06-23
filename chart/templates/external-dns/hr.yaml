@@ -35,7 +35,7 @@ spec:
   values:
     provider: google
     # Specify the Google project (required when provider=google)
-    # You'll need to create this secret containing your credentials.json
+    # need to make avalues, or expect peopel to override with a postrenderer
     extraArgs:
     - --google-project=leapfrogai
     sources:

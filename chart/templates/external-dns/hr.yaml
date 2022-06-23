@@ -32,6 +32,9 @@ spec:
     remediation:
       remediateLastFailure: true
       retries: 3
+  dependsOn:
+  - name: istio
+    namespace: bigbang
   values:
     provider: google
     # Specify the Google project (required when provider=google)

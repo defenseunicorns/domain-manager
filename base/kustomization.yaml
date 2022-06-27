@@ -18,3 +18,7 @@ secretGenerator:
     behavior: create
     literals:
     - values.yaml=
+  - name: domain-manager-optional
+    behavior: create
+    literals:
+    - values.yaml=

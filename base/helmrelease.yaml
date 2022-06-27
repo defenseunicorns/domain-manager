@@ -28,3 +28,6 @@ spec:
   valuesFrom:
     - kind: Secret
       name: domain-manager
+    - kind: Secret
+      name: domain-manager-optional
+      optional: true

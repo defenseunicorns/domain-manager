@@ -3,3 +3,6 @@ credentials: ""
 
 # Don't use bigbang.dev here, or it'll overwrite the *.bigbang.dev domain in dns
 domain: "domain.bigbang.dev"
+
+istio:
+  enabled: false

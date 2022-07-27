@@ -36,6 +36,8 @@ spec:
   - name: istio
     namespace: bigbang
   values:
+    startupapicheck:
+      enabled: false
     certificates: 
     - name: public-cert
       namespace: istio-system

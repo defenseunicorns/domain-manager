@@ -36,6 +36,9 @@ spec:
   - name: istio
     namespace: bigbang
   values:
+    global:
+      leaderElection:
+        namespace: "cert-manager"
     startupapicheck:
       enabled: false
     certificates: 

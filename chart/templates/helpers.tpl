@@ -8,6 +8,6 @@ secretRef:
 {{- else if coalesce .Values.git.credentials.username .Values.git.credentials.password .Values.git.credentials.caFile .Values.git.credentials.privateKey .Values.git.credentials.publicKey .Values.git.credentials.knownHosts "" -}}
 {{- /* Input validation happens in git-credentials.yaml template */ -}}
 secretRef:
-  name: {{ $.Release.Name }}-git-credentials
+  name: private-git-server
 {{- end -}}
 {{- end -}}

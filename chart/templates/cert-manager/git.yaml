@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{ $.Release.Name }}-git-credentials
+  name: private-git-server
   namespace: cert-manager
 type: Opaque
 data:

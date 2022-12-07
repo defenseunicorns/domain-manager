@@ -15,7 +15,7 @@ spec:
   ref:
     branch: master
   timeout: 60s
-  url: https://github.com/kubernetes-sigs/external-dns
+  url: https://github.com/kubernetes-sigs/external-dns.git
   {{- include "gitCreds" . | nindent 2 }}
 ---
 {{- if not .Values.git.existingSecret }}

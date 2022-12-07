@@ -9,6 +9,6 @@ spec:
     /**/*.txt
     /**/*.sh
   interval: 10m
-  url: https://github.com/defenseunicorns/domain-manager
+  url: https://github.com/defenseunicorns/domain-manager.git
   ref:
     branch: main

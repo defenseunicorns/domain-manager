@@ -6,3 +6,12 @@ domain: "domain.bigbang.dev"
 
 istio:
   enabled: false
+
+git:
+  existingSecret: ""
+  # -- Chart created secrets with user defined values
+  credentials:
+    # -- HTTP git credentials, both username and password must be provided
+    username: ""
+    password: ""
+
